@@ -18,8 +18,7 @@ This Turborepo includes the following packages/apps:
 
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `@next/eslint-plugin-next` and `eslint-config-prettier`)
+- `@repo/ui`: a shared React component library (Tailwind CSS + shadcn/ui) used by both `web` and `docs` applications
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
@@ -29,8 +28,33 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 This Turborepo has some additional tools already setup for you:
 
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- [Biome](https://biomejs.dev/) for linting, formatting, and import sorting
+- [Tailwind CSS](https://tailwindcss.com/) and [shadcn/ui](https://ui.shadcn.com/) for styling and UI components
+
+### Linting and formatting
+
+Run Biome across the whole monorepo:
+
+```sh
+bun run lint    # check formatting, lint rules, and import order
+bun run format  # format files
+bun run check   # check and apply safe fixes
+```
+
+### Adding UI components
+
+shadcn/ui is configured for the monorepo. Run `add` from the app workspace:
+
+```sh
+cd apps/web
+bunx shadcn@latest add button
+```
+
+Shared components are installed to `packages/ui/src/components` and can be imported with:
+
+```tsx
+import { Button } from "@repo/ui/components/button";
+```
 
 ### Build
 
